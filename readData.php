@@ -12,6 +12,7 @@
 <body>
     <h1 style="text-align: center;">User Data</h1>
     <?php
+    $count = 0;
     $dbServerName = "localhost";
     $dbUserName = "root";
     $dbPassword = "";
@@ -30,7 +31,7 @@
         echo "<div class='readDataCard'>";
         echo "<table><tr><td>ID</td><th>First Name</th><th>Last Name</th><th>Email Id</th></tr>";
         while ($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["firstname"] . "</td><td>" . $row["lastname"] . "</td><td>" . $row["email"] . "</td></tr>";
+            echo "<tr><td>" . ++$count . "</td><td>" . $row["firstname"] . "</td><td>" . $row["lastname"] . "</td><td>" . $row["email"] . "</td></tr>";
         }
         echo "</table>";
         echo "</div>";

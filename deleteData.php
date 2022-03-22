@@ -19,7 +19,7 @@
     $dbName = "userdata";
 
     $email =  $userAddedSuccess = "";
-    $emailError  = "";
+    $emailError  = $noUserError = "";
     $flag = true;
 
     $connection = new mysqli($dbServerName, $dbUserName, $dbPassword, $dbName);
@@ -39,19 +39,19 @@
 
         if ($flag == true) {
 
-            // $query = "SELECT TOP 1 users.id FROM users WHERE users.id = ?";
+            $query = "SELECT * FROM users WHERE email = '$email'";
+            $result = $connection->query($query);
+            if ($result->num_rows > 0) {
 
-            // if ($connection->query($query) === TRUE) {
+                $sql = "DELETE FROM users WHERE email = '$email'";
 
-            $sql = "DELETE FROM users WHERE email = '$email'";
-
-            if ($connection->query($sql) === FALSE) {
-                echo "Error deleting record: " . $connection->error;
+                if ($connection->query($sql) === FALSE) {
+                    echo "Error deleting record: " . $connection->error;
+                }
+                $userAddedSuccess = "Record Deleted successfully";
+            } else {
+                $noUserError =  "User Does Not Exist";
             }
-            $userAddedSuccess = "Record Deleted successfully";
-            // } else {
-            //     echo "No Such Record Found";
-            // }
             $connection->close();
         }
     }
@@ -59,7 +59,7 @@
     ?>
     <div class="createDataCard">
         <h1>Welcome</h1>
-        <h3>Enter Values to Update</h3>
+        <h3>Enter Values to Delete</h3>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
             <input class=" inputField" type="email" id="email" name="email" placeholder="Email"><br>
@@ -67,6 +67,7 @@
 
             <button class="submitBtn" type="submit" name="submit" value="Submit">Submit</button><br>
             <span class="successMsg"><?php echo $userAddedSuccess; ?></span>
+            <span class="errorMsg"><?php echo $noUserError; ?></span>
 
             <a href="./readData.php" class="viewDataBtn">View Data</a>
 

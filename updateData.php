@@ -19,7 +19,7 @@
     $dbName = "userdata";
 
     $firstName = $lastName = $email =  $userAddedSuccess = $userId = "";
-    $firstNameError = $lastNameError = $emailError  = $userIdError = "";
+    $firstNameError = $lastNameError = $emailError  = $noUserError = "";
     $flag = true;
 
     $connection = new mysqli($dbServerName, $dbUserName, $dbPassword, $dbName);
@@ -30,7 +30,6 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $userId = $_POST['userId'];
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
         $email = $_POST['email'];
@@ -47,25 +46,21 @@
             $emailError = "Email Should not be null empty";
             $flag = false;
         }
-        if (empty($userId)) {
-            $userIdError = "UserId should not be null empty";
-            $flag = false;
-        }
         if ($flag == true) {
 
-            // $query = "SELECT TOP 1 users.id FROM users WHERE users.id = ?";
+            $query = "SELECT * FROM users WHERE email = '$email'";
+            $result = $connection->query($query);
+            if ($result->num_rows > 0) {
 
-            // if ($connection->query($query) === TRUE) {
+                $sql = "UPDATE users SET firstname='$firstName', lastname='$lastName' WHERE email='$email'";
 
-            $sql = "UPDATE users SET firstname='$firstName', lastname='$lastName' WHERE id='$userId'";
-
-            if ($connection->query($sql) === FALSE) {
-                echo "Error updating record: " . $connection->error;
+                if ($connection->query($sql) === FALSE) {
+                    echo "Error updating record: " . $connection->error;
+                }
+                $userAddedSuccess = "Record updated successfully";
+            } else {
+                $noUserError =  "User Does Not Exist";
             }
-            $userAddedSuccess = "Record updated successfully";
-            // } else {
-            //     echo "No Such Record Found";
-            // }
             $connection->close();
         }
     }
@@ -75,20 +70,18 @@
         <h1>Welcome</h1>
         <h3>Enter Values to Update</h3>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <input class="inputField" type="text" id="userId" name="userId" placeholder="User Id"><br>
-            <span class="errorMsg"><?php echo $userIdError; ?></span><br>
+            <input class=" inputField" type="email" id="email" name="email" placeholder="Email" value="<?php echo $email ?>"><br>
+            <span class="errorMsg"><?php echo $emailError; ?></span><br>
 
-            <input class="inputField" type="text" id="firstName" name="firstName" placeholder="First Name"><br>
+            <input class="inputField" type="text" id="firstName" name="firstName" placeholder="First Name" value="<?php echo $firstName ?>"><br>
             <span class="errorMsg"><?php echo $firstNameError; ?></span><br>
 
-            <input class="inputField" type="text" id="lastName" name="lastName" placeholder="Last Name"><br>
+            <input class="inputField" type="text" id="lastName" name="lastName" placeholder="Last Name" value="<?php echo $lastName ?>"><br>
             <span class="errorMsg"><?php echo $lastNameError; ?></span><br>
-
-            <input class=" inputField" type="email" id="email" name="email" placeholder="Email"><br>
-            <span class="errorMsg"><?php echo $emailError; ?></span><br>
 
             <button class="submitBtn" type="submit" name="submit" value="Submit">Submit</button><br>
             <span class="successMsg"><?php echo $userAddedSuccess; ?></span>
+            <span class="errorMsg"><?php echo $noUserError; ?></span>
 
             <a href="./readData.php" class="viewDataBtn">View Data</a>
 

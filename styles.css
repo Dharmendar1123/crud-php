@@ -73,36 +73,6 @@ th {
   margin: 10px 0;
 }
 
-/* .editBtn {
-  background-color: #32cd32;
-  border-radius: 5px;
-  border: 0;
-  box-sizing: border-box;
-  color: #eee;
-  cursor: pointer;
-  font-size: 18px;
-  height: 30px;
-  margin: 0 0 10px 20px;
-  text-align: center;
-  width: 20%;
-  float: right;
-} */
-
-/* .deleteBtn {
-  background-color: #ff0038;
-  border-radius: 5px;
-  border: 0;
-  box-sizing: border-box;
-  color: #eee;
-  cursor: pointer;
-  font-size: 18px;
-  height: 30px;
-  margin: 0 0 10px 20px;
-  text-align: center;
-  width: 20%;
-  float: right;
-} */
-
 .viewDataBtn {
   display: block;
   width: 50%;
