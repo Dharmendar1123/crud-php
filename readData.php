@@ -7,11 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <title>User Data</title>
+    <script>
+        function confirmDelete() {
+            return confirm("Confirm Delete");
+        }
+    </script>
 </head>
 
 <body>
     <h1 style="text-align: center;">User Data</h1>
     <?php
+    include "encrypt.php";
+
     $count = 0;
     $dbServerName = "localhost";
     $dbUserName = "root";
@@ -31,8 +38,17 @@
         echo "<div class='readDataCard'>";
         echo "<table><tr><td>ID</td><th>First Name</th><th>Last Name</th><th>Email Id</th></tr>";
         while ($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . ++$count . "</td><td>" . $row["firstname"] . "</td><td>" . $row["lastname"] . "</td><td>" . $row["email"] . "</td></tr>";
-        }
+            echo "<tr>
+            <td>" . ++$count . "</td>
+            <td>" . $row["firstname"] . "</td>
+            <td>" . $row["lastname"] . "</td>"
+    ?>
+            <td><?php echo $row["email"] ?>
+                <a href='deleteData.php?u_id=<?php echo encrypt($row['id']) ?>' class=' deleteBtn' onclick='return confirmDelete()'>Delete User</a>
+                <a href='updateData.php?u_id=<?php echo encrypt($row['id']) ?>' class='editBtn'>Update User</a>
+            </td>
+            </tr>
+    <?php }
         echo "</table>";
         echo "</div>";
     } else {
@@ -40,12 +56,12 @@
     }
 
     $connection->close();
-
     ?>
 
-    <a href="./createData.php" class="viewDataBtn">Add User</a>
-    <a href="./updateData.php" class="editBtn">Update User</a>
-    <a href="./deleteData.php" class="deleteBtn">Delete User</a>
+
+    <a href="./createData.php" class="addUserBtn">Add User</a>
+    <!-- <a href="./updateData.php" class="editBtn">Update User</a> -->
+    <!-- <a href="./deleteData.php" class="deleteBtn">Delete User</a> -->
 
 </body>
 
