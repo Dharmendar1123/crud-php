@@ -12,6 +12,7 @@
 
 <body>
     <?php
+    include "encrypt.php";
 
     $dbServerName = "localhost";
     $dbUserName = "root";
@@ -28,11 +29,25 @@
         die("Connection failed: " . $connection->connect_error);
     }
 
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $userId = decrypt($_GET['u_id']);
+        $getUserQuery = "SELECT * FROM users WHERE id='$userId'";
+        $output = $connection->query($getUserQuery);
+        if ($output->num_rows > 0) {
+            $data = $output->fetch_assoc();
+            $firstName = $data['firstname'];
+            $lastName = $data['lastname'];
+            $email = $data['email'];
+        }
+    }
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
 
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
         $email = $_POST['email'];
+
 
         if (empty($firstName)) {
             $firstNameError = "First Name should not be null empty";
@@ -52,7 +67,7 @@
             $result = $connection->query($query);
             if ($result->num_rows > 0) {
 
-                $sql = "UPDATE users SET firstname='$firstName', lastname='$lastName' WHERE email='$email'";
+                $sql = "UPDATE users SET firstname='$firstName', lastname='$lastName'  WHERE email='$email'";
 
                 if ($connection->query($sql) === FALSE) {
                     echo "Error updating record: " . $connection->error;
@@ -64,6 +79,8 @@
             $connection->close();
         }
     }
+
+
 
     ?>
     <div class="createDataCard">
