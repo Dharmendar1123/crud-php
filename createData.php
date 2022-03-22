@@ -12,6 +12,7 @@
 
 <body>
     <?php
+    include "encrypt.php";
 
     $dbServerName = "localhost";
     $dbUserName = "root";
@@ -33,7 +34,7 @@
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = passwordEncode($_POST['password']);
 
         if (empty($firstName)) {
             $firstNameError = "First Name should not be null empty";
