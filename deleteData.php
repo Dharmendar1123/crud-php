@@ -12,6 +12,7 @@
 
 <body>
     <?php
+    include "encrypt.php";
 
     $dbServerName = "localhost";
     $dbUserName = "root";
@@ -28,33 +29,43 @@
         die("Connection failed: " . $connection->connect_error);
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    //     $userId = $_GET['u_id'];
+    //     $getUserQuery = "DELETE FROM users WHERE id = '$userId'";
+    //     if ($connection->query($getUserQuery) === FALSE) {
+    //         echo "Error deleting record: " . $connection->error;
+    //     }
+    // }
 
-        $email = $_POST['email'];
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-        if (empty($email)) {
-            $emailError = "Email Should not be null empty";
-            $flag = false;
-        }
+        // $email = $_POST['email'];
+        $userId = decrypt($_GET['u_id']);
 
-        if ($flag == true) {
+        // if (empty($userId)) {
+        //     $emailError = "Email Should not be null empty";
+        //     $flag = false;
+        // }
 
-            $query = "SELECT * FROM users WHERE email = '$email'";
-            $result = $connection->query($query);
-            if ($result->num_rows > 0) {
+        // if ($flag == true) {
 
-                $sql = "DELETE FROM users WHERE email = '$email'";
+        $query = "SELECT * FROM users WHERE id = '$userId'";
+        $result = $connection->query($query);
+        if ($result->num_rows > 0) {
 
-                if ($connection->query($sql) === FALSE) {
-                    echo "Error deleting record: " . $connection->error;
-                }
-                $userAddedSuccess = "Record Deleted successfully";
-            } else {
-                $noUserError =  "User Does Not Exist";
+            $sql = "DELETE FROM users WHERE id = '$userId'";
+
+            if ($connection->query($sql) === FALSE) {
+                echo "Error deleting record: " . $connection->error;
             }
-            $connection->close();
+            $userAddedSuccess = "Record Deleted successfully";
+        } else {
+            $noUserError =  "User Does Not Exist";
         }
+        $connection->close();
+        // }
     }
+    header('location:readData.php');
 
     ?>
     <div class="createDataCard">
