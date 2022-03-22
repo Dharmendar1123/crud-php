@@ -70,9 +70,10 @@ th {
 }
 .successMsg {
   color: #32cd32;
+  margin: 10px 0;
 }
 
-.editBtn {
+/* .editBtn {
   background-color: #32cd32;
   border-radius: 5px;
   border: 0;
@@ -85,9 +86,9 @@ th {
   text-align: center;
   width: 20%;
   float: right;
-}
+} */
 
-.deleteBtn {
+/* .deleteBtn {
   background-color: #ff0038;
   border-radius: 5px;
   border: 0;
@@ -100,4 +101,52 @@ th {
   text-align: center;
   width: 20%;
   float: right;
+} */
+
+.viewDataBtn {
+  display: block;
+  width: 50%;
+  background: #08d;
+  padding: 15px;
+  margin: 10px auto !important;
+  text-align: center;
+  border-radius: 12px;
+  color: #eee;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  text-decoration: none;
+}
+
+.editBtn {
+  display: block;
+  width: 50%;
+  background: #32cd32;
+  padding: 15px;
+  margin: 10px auto !important;
+  text-align: center;
+  border-radius: 12px;
+  color: #eee;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  text-decoration: none;
+}
+
+.deleteBtn {
+  display: block;
+  width: 50%;
+  background: #ff0038;
+  padding: 15px;
+  margin: 10px auto !important;
+  text-align: center;
+  border-radius: 12px;
+  color: #eee;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  text-decoration: none;
 }

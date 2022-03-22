@@ -30,7 +30,7 @@
         echo "<div class='readDataCard'>";
         echo "<table><tr><td>ID</td><th>First Name</th><th>Last Name</th><th>Email Id</th></tr>";
         while ($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["firstname"] . "</td><td>" . $row["lastname"] . "</td><td>" . $row["email"] . "<button class='deleteBtn' type='submit'>Delete</button><button class='editBtn' type='submit'>Edit</button></td></tr>";
+            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["firstname"] . "</td><td>" . $row["lastname"] . "</td><td>" . $row["email"] . "</td></tr>";
         }
         echo "</table>";
         echo "</div>";
@@ -41,6 +41,10 @@
     $connection->close();
 
     ?>
+
+    <a href="./createData.php" class="viewDataBtn">Add User</a>
+    <a href="./updateData.php" class="editBtn">Update User</a>
+    <a href="./deleteData.php" class="deleteBtn">Delete User</a>
 
 </body>
 
