@@ -91,24 +91,42 @@ th {
 
 .editBtn {
   display: block;
-  width: 50%;
+  width: 25%;
   background: #32cd32;
-  padding: 15px;
-  margin: 10px auto !important;
+  padding: 6px;
   text-align: center;
-  border-radius: 12px;
+  border-radius: 8px;
   color: #eee;
   box-sizing: border-box;
   cursor: pointer;
-  font-size: 18px;
-  height: 50px;
+  font-size: 16px;
+  height: 30px;
   text-decoration: none;
+  float: right;
+  margin: 0 10px;
 }
 
 .deleteBtn {
   display: block;
-  width: 50%;
+  width: 25%;
   background: #ff0038;
+  padding: 6px;
+  text-align: center;
+  border-radius: 8px;
+  color: #eee;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  height: 30px;
+  text-decoration: none;
+  float: right;
+  margin: 0 10px;
+}
+
+.addUserBtn {
+  display: block;
+  width: 25%;
+  background: #08d;
   padding: 15px;
   margin: 10px auto !important;
   text-align: center;
