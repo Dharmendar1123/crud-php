@@ -55,7 +55,7 @@
     ?>
 
 
-    <a href="./createData.php" class="addUserBtn">Add User</a>
+    <a href="createData.php" class="addUserBtn">Add User</a>
     <!-- <a href="./updateData.php" class="editBtn">Update User</a> -->
     <!-- <a href="./deleteData.php" class="deleteBtn">Delete User</a> -->
 
