@@ -19,8 +19,8 @@
     $dbPassword = "";
     $dbName = "userdata";
 
-    $firstName = $lastName = $email =  $userAddedSuccess = $userId = "";
-    $firstNameError = $lastNameError = $emailError  = $noUserError = "";
+    $firstName = $lastName = $email =  $userAddedSuccess = $userId = $password =  "";
+    $firstNameError = $lastNameError = $emailError  = $noUserError = $passwordError = "";
     $flag = true;
 
     $connection = new mysqli($dbServerName, $dbUserName, $dbPassword, $dbName);
@@ -47,6 +47,8 @@
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
         $email = $_POST['email'];
+        $userId = $_POST['id'];
+        $password = passwordEncode($_POST['password']);
 
 
         if (empty($firstName)) {
@@ -61,18 +63,23 @@
             $emailError = "Email Should not be null empty";
             $flag = false;
         }
+        if (empty($password)) {
+            $passwordError = "Password should not be null empty";
+            $flag = false;
+        }
         if ($flag == true) {
 
-            $query = "SELECT * FROM users WHERE email = '$email'";
+            $query = "SELECT * FROM users WHERE id = '$userId'";
             $result = $connection->query($query);
             if ($result->num_rows > 0) {
 
-                $sql = "UPDATE users SET firstname='$firstName', lastname='$lastName'  WHERE email='$email'";
+                $sql = "UPDATE users SET firstname='$firstName', lastname='$lastName', email='$email', password='$password'  WHERE id='$userId'";
 
                 if ($connection->query($sql) === FALSE) {
                     echo "Error updating record: " . $connection->error;
                 }
                 $userAddedSuccess = "Record updated successfully";
+                header('location:readData.php');
             } else {
                 $noUserError =  "User Does Not Exist";
             }
@@ -87,6 +94,9 @@
         <h1>Welcome</h1>
         <h3>Enter Values to Update</h3>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
+            <input class=" inputField" type="hidden" id="id" name="id" placeholder="ID" value="<?php echo $userId ?>"><br>
+
             <input class=" inputField" type="email" id="email" name="email" placeholder="Email" value="<?php echo $email ?>"><br>
             <span class="errorMsg"><?php echo $emailError; ?></span><br>
 
@@ -96,7 +106,10 @@
             <input class="inputField" type="text" id="lastName" name="lastName" placeholder="Last Name" value="<?php echo $lastName ?>"><br>
             <span class="errorMsg"><?php echo $lastNameError; ?></span><br>
 
-            <button class="submitBtn" type="submit" name="submit" value="Submit">Submit</button><br>
+            <input class="inputField" type="password" name="password" placeholder="Password"><br>
+            <span class="errorMsg"><?php echo $lastNameError; ?></span><br>
+
+            <button class="submitBtn" type="submit" name="submit" value="Submit" onclick="alert('Record Updated Successfully');">Submit</button><br>
             <span class="successMsg"><?php echo $userAddedSuccess; ?></span>
             <span class="errorMsg"><?php echo $noUserError; ?></span>
 
