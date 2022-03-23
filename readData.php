@@ -7,11 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <title>User Data</title>
-    <script>
-        function confirmDelete() {
-            return confirm("Confirm Delete");
-        }
-    </script>
+
 </head>
 
 <body>
@@ -44,7 +40,7 @@
             <td>" . $row["lastname"] . "</td>"
     ?>
             <td><?php echo $row["email"] ?>
-                <a href='deleteData.php?u_id=<?php echo encrypt($row['id']) ?>' class=' deleteBtn' onclick='return confirmDelete()'>Delete User</a>
+                <a href='deleteData.php?u_id=<?php echo encrypt($row['id']) ?>' class=' deleteBtn' onclick='return confirm("Confirm Delete");'>Delete User</a>
                 <a href='updateData.php?u_id=<?php echo encrypt($row['id']) ?>' class='editBtn'>Update User</a>
             </td>
             </tr>
