@@ -63,7 +63,7 @@
             $userAddedSuccess = "User Added Successfully";
             $connection->close();
 
-            // header('location: readData.php');
+            header('location: readData.php');
         }
     }
 
@@ -84,7 +84,7 @@
             <input class=" inputField" type="password" id="password" name="password" placeholder="Password"><br>
             <span class="errorMsg"><?php echo $passwordError; ?></span><br>
 
-            <button class="submitBtn" type="submit" name="submit" value="Submit">Submit</button><br>
+            <button class="submitBtn" type="submit" name="submit" value="Submit" onclick="alert('User Added Successfully');">Submit</button><br>
             <span class="successMsg"><?php echo $userAddedSuccess; ?></span>
 
             <a href="./readData.php" class="viewDataBtn">View Data</a>
