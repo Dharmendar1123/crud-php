@@ -14,18 +14,19 @@
     <h1 style="text-align: center;">User Data</h1>
     <?php
     include "encrypt.php";
+    include "sqlConnection.php";
 
     $count = 0;
-    $dbServerName = "localhost";
-    $dbUserName = "root";
-    $dbPassword = "";
-    $dbName = "userdata";
+    // $dbServerName = "localhost";
+    // $dbUserName = "root";
+    // $dbPassword = "";
+    // $dbName = "userdata";
 
-    $connection = new mysqli($dbServerName, $dbUserName, $dbPassword, $dbName);
+    // $connection = new mysqli($dbServerName, $dbUserName, $dbPassword, $dbName);
 
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+    // if ($connection->connect_error) {
+    //     die("Connection failed: " . $connection->connect_error);
+    // }
 
     $sql = "SELECT * FROM users";
     $result = $connection->query($sql);
@@ -56,8 +57,6 @@
 
 
     <a href="createData.php" class="addUserBtn">Add User</a>
-    <!-- <a href="./updateData.php" class="editBtn">Update User</a> -->
-    <!-- <a href="./deleteData.php" class="deleteBtn">Delete User</a> -->
 
 </body>
 

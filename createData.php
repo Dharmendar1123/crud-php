@@ -13,21 +13,22 @@
 <body>
     <?php
     include "encrypt.php";
+    include "sqlConnection.php";
 
-    $dbServerName = "localhost";
-    $dbUserName = "root";
-    $dbPassword = "";
-    $dbName = "userdata";
+    // $dbServerName = "localhost";
+    // $dbUserName = "root";
+    // $dbPassword = "";
+    // $dbName = "userdata";
 
     $firstName = $lastName = $email = $password = $userAddedSuccess = "";
     $firstNameError = $lastNameError = $emailError = $passwordError = "";
     $flag = true;
 
-    $connection = new mysqli($dbServerName, $dbUserName, $dbPassword, $dbName);
+    // $connection = new mysqli($dbServerName, $dbUserName, $dbPassword, $dbName);
 
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+    // if ($connection->connect_error) {
+    //     die("Connection failed: " . $connection->connect_error);
+    // }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
